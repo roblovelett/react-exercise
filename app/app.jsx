@@ -41,14 +41,12 @@ function Application(props) {
     );
 };
 
-Application.propTypes = { //sets property values to be passed into the Application component
-    //React.PropTypes declares property, in this case string. isRequired demands
-    //title attribute to be passed into Application component
-    title: React.PropTypes.string/*.isRequired*/,
+Application.propTypes = { 
+    title: React.PropTypes.string,
 };
 
-Application.defaultProps = { //sets default property values
-    title: "Scoreboard",
+Application.defaultProps = {
+    title: "Scoreboard"
 };
 
-ReactDOM.render(<Application />, document.getElementById('container'));
+ReactDOM.render(<Application title="My Scoreboard" />, document.getElementById('container'));
