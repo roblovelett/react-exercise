@@ -2,7 +2,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-var roster = [
+var roster = [ //create array of players, scores, id
     {
         name: "Billy 01",
         score: 23,
