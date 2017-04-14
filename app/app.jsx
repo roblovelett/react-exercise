@@ -43,7 +43,7 @@ function Player(props) {
             <div className="player-name">
                 {props.name}
             </div>
-            <Counter score={props.score} />
+            <Counter />
         </div>
     );
 };
@@ -53,21 +53,30 @@ Player.propTypes = {
     score: React.PropTypes.number.isRequired
 };
 
-function Counter(props) {
-    return (
-        <div className="player-score">
-            <div className="counter">
-                <button className="counter-action decrement"> - </button>
-                <div className="counter-score"> {props.score} </div>
-                <button className="counter-action increment"> + </button>
-            </div>
-        </div>
-    );
-};
+var Counter = React.createClass({ //create a class when you want to add state to your component
+    //in a component class, props is a property of the class itself.
+    //it does not get passed into a stateless functional component.
+    //so: use this.props
+    propTypes : {},
 
-Counter.propTypes = {
-    score: React.PropTypes.number.isRequired
-};
+    getInitialState: function() { //getInitialState is a custom react method that returns an object "state"
+        return {
+            score: 0,
+        }
+    },
+
+    render: function() {
+        return (
+            <div className="player-score">
+                <div className="counter">
+                    <button className="counter-action decrement"> - </button>
+                    <div className="counter-score"> {this.state.score} </div>
+                    <button className="counter-action increment"> + </button>
+                </div>
+            </div>
+        );
+   }
+});
 
 function Application(props) {
     return (
