@@ -43,7 +43,7 @@ function Player(props) {
             <div className="player-name">
                 {props.name}
             </div>
-            <Counter />
+            <Counter initialScore={props.score} />
         </div>
     );
 };
@@ -57,21 +57,41 @@ var Counter = React.createClass({ //create a class when you want to add state to
     //in a component class, props is a property of the class itself.
     //it does not get passed into a stateless functional component.
     //so: use this.props
-    propTypes : {},
+    propTypes : {
+        initialScore: React.PropTypes.number.isRequired
+    },
 
     getInitialState: function() { //getInitialState is a custom react method that returns an object "state"
         return {
-            score: 0,
+            score: this.props.initialScore,
         }
+    },
+
+    incrementScore: function(event) {
+        //setState() enqueues changes to the component state and tells React that
+        //this component and its children need to be re-rendered with the updated
+        //state. This is the primary method you use to update the user interface
+        //in response to event handlers and server responses.
+        this.setState({
+            score: (this.state.score + 1) //method handle ()
+        });
+    },
+
+    decrementScore: function(event) {
+        if (this.state.score > 0) {
+            this.setState({
+                score: (this.state.score - 1)
+            });
+        };
     },
 
     render: function() {
         return (
             <div className="player-score">
                 <div className="counter">
-                    <button className="counter-action decrement"> - </button>
+                    <button className="counter-action decrement" onClick={this.decrementScore}> - </button>
                     <div className="counter-score"> {this.state.score} </div>
-                    <button className="counter-action increment"> + </button>
+                    <button className="counter-action increment" onClick={this.incrementScore}> + </button>
                 </div>
             </div>
         );
